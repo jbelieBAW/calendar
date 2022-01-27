@@ -394,7 +394,16 @@ class App extends Component {
         default:
           console.log("Unbound value");    
       }
-      lastEvent.desc= lastEvent.country +" / " + lastEvent.bu + " / " + lastEvent.entity + " / " + lastEvent.site;
+      lastEvent.desc= lastEvent.country;
+	  if (lastEvent.bu) {
+		  lastEvent.desc+=" / " + lastEvent.bu;
+			if(lastEvent.entity) {
+				lastEvent.desc+=" / " + lastEvent.entity;
+				if(lastEvent.site) {
+					lastEvent.desc+=" / " + lastEvent.site;
+				}
+			}
+	  }
       if(lastEvent.safe != ""){
         lastEvent.desc = lastEvent.desc + " / " + lastEvent.safe;
       }
