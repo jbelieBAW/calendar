@@ -192,7 +192,7 @@ class App extends Component {
     var currentCulture = '';
     var currentDefaultMessages = {};
     var currentDeleteButtonText = '';
-    if ($('#76a4a86c-fa4b-2ce5-3a59-e321023199b1_12e84390-7a82-8126-cb31-716bc0e84d1c .input-control span').html()=='FR'){
+   if ($('[name="com.dcr.datalabel.lang"]').html()=='FR'){
     //if (/^fr\b/.test(navigator.language)) {
       currentCulture = 'fr';
       currentDefaultMessages = defaultMessages_fr;
