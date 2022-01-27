@@ -278,7 +278,16 @@ class App extends Component {
           default:
             console.log("Unbound value");    
         }
-        my_self.event.desc= my_self.event.country +" / " + my_self.event.bu + " / " + my_self.event.entity + " / " + my_self.event.site;
+        my_self.event.desc= my_self.event.country ;
+		if ( my_self.event.bu ) {
+			my_self.event.desc+=" / " + my_self.event.bu;
+			if ( my_self.event.entity ) {
+				my_self.event.desc+=" / " + my_self.event.entity;
+				if ( my_self.event.site ) {
+					my_self.event.desc+=" / " + my_self.event.site;
+				}				
+			}
+		}
         if(my_self.event.safe != ""){
           my_self.event.desc = my_self.event.desc + " / " + my_self.event.safe;
         }
