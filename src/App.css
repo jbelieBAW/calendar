@@ -41,8 +41,8 @@
   color: white !important;
 }
 
-.rbc-event-content div .eventTitle,
-.rbc-agenda-event-cell div .eventTitle{
+.rbc-event-content div .eventTitle span,
+.rbc-agenda-event-cell div .eventTitle span{
   color: white !important;
   font-weight: bold !important;
 }
