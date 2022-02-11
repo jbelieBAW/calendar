@@ -61,15 +61,13 @@ const defaultMessages_en={
 
 function Event({ event }) {
   function deleteEventClick(id) {
-    console.log($('span[name="react-control-customData"]'));
-    console.log($('a[name="react-control-deleteEvent-button"]'));
     $('span[name="react-control-customData"]').text(id);
     document.getElementsByName("react-control-deleteEvent-button")[0].click();
   };
 
   let popoverClickRootClose = (
     <Popover id="popover-trigger-click-root-close">
-      <Popover.Header as="h3">{event.title}</Popover.Header>
+      <Popover.Header as="h3"><span name='{event.title}'></span></Popover.Header>
       <Popover.Body>
         <span>{event.country}</span><br/>
         <span>{event.bu}</span><br/>
@@ -83,7 +81,7 @@ function Event({ event }) {
 
   return (
     <OverlayTrigger id="help" trigger="click" rootClose container={this} placement="top" overlay={popoverClickRootClose}>
-      <div><span class="eventTitle">{event.title}</span><br/>{event.desc}</div>
+      <div><span class="eventTitle" name='{event.title}'></span><br/>{event.desc}</div>
     </OverlayTrigger>
   );
 }
@@ -100,7 +98,6 @@ class App extends Component {
     var currentDeleteButtonText = '';
     var currentCulture = '';
     if ($('[name="com.dcr.datalabel.lang"]').html()=='FR'){
-    //if (/^fr\b/.test(navigator.language)) {
       currentDeleteButtonText = 'SUPPRIMER';
       var currentCulture = 'fr';
     }else{
@@ -115,7 +112,7 @@ class App extends Component {
       $this.children("td").each(function( idx ) {
         my_self.event.allDay=true;
         my_self.event.deleteButtonText=currentDeleteButtonText;
-        switch(idx){
+		switch(idx){
           //ID
           case 0:
             my_self.event.id=$(this).data("options").value;
@@ -150,24 +147,10 @@ class App extends Component {
             break;
           //TASK NAME FR
           case 8:
-            if (currentCulture=='fr') {
               my_self.event.title=$(this).data("options").value;
-            }
-            break;
-          //TASK NAME EN
-          case 9:
-            if (currentCulture=='en') {
-              my_self.event.title=$(this).data("options").value;
-            }
             break;  
-          //TASK TYPE INSTANCE
-          case 10:
-            break;
-          //TASK TYPE ID
-          case 11:
-            break;
           // TASK COLOR
-          case 12:
+          case 10:
             my_self.event.color=$(this).data("options").value;
             break;
           default:
@@ -255,24 +238,10 @@ class App extends Component {
             break;
           //TASK NAME FR
           case 8:
-            if (currentCulture=='fr') {
               my_self.event.title=$(this).data("options").value;
-            }
-            break;
-          //TASK NAME EN
-          case 9:
-            if (currentCulture=='en') {
-              my_self.event.title=$(this).data("options").value;
-            }
             break;  
-          //TASK TYPE INSTANCE
-          case 10:
-            break;
-          //TASK TYPE ID
-          case 11:
-            break;
           // TASK COLOR
-          case 12:
+          case 10:
             my_self.event.color=$(this).data("options").value;
             break;
           default:
@@ -337,63 +306,49 @@ class App extends Component {
       lastEvent.allDay=true;
       lastEvent.deleteButtonText=currentDeleteButtonText;
       switch(idx){
-        //ID
-        case 0:
-          lastEvent.id=$(this).data("options").value;
-          break;
-        //COUNTRY
-        case 1:
-          lastEvent.country=$(this).data("options").value;
-          break;
-        //BU
-        case 2:
-          lastEvent.bu=$(this).data("options").value;
-          break;
-        //ENTITY
-        case 3:
-          lastEvent.entity=$(this).data("options").value;
-          break;
-        //SITE
-        case 4:
-          lastEvent.site=$(this).data("options").value;
-          break;
-        //SAFE
-        case 5:
-          lastEvent.safe=$(this).data("options").value;
-          break;
-        //START DATE
-        case 6:
-          lastEvent.start=$(this).data("options").value;
-          break;
-        //END DATE
-        case 7:
-          lastEvent.end=$(this).data("options").value;
-          break;
-        //TASK NAME FR
-        case 8:
-          if (currentCulture=='fr') {
-            lastEvent.title=$(this).data("options").value;
-          }
-          break;
-        //TASK NAME EN
-        case 9:
-          if (currentCulture=='en') {
-            lastEvent.title=$(this).data("options").value;
-          }
-          break;  
-        //TASK TYPE INSTANCE
-        case 10:
-          break;
-        //TASK TYPE ID
-        case 11:
-          break;
-        // TASK COLOR
-        case 12:
-          lastEvent.color=$(this).data("options").value;
-          break;
-        default:
-          console.log("Unbound value");    
-      }
+          //ID
+          case 0:
+            my_self.event.id=$(this).data("options").value;
+            break;
+          //COUNTRY
+          case 1:
+            my_self.event.country=$(this).data("options").value;
+            break;
+          //BU
+          case 2:
+            my_self.event.bu=$(this).data("options").value;
+            break;
+          //ENTITY
+          case 3:
+            my_self.event.entity=$(this).data("options").value;
+            break;
+          //SITE
+          case 4:
+            my_self.event.site=$(this).data("options").value;
+            break;
+          //SAFE
+          case 5:
+            my_self.event.safe=$(this).data("options").value;
+            break;  
+          //START DATE
+          case 6:
+            my_self.event.start=$(this).data("options").value;
+            break;
+          //END DATE
+          case 7:
+            my_self.event.end=$(this).data("options").value;
+            break;
+          //TASK NAME FR
+          case 8:
+              my_self.event.title=$(this).data("options").value;
+            break;  
+          // TASK COLOR
+          case 10:
+            my_self.event.color=$(this).data("options").value;
+            break;
+          default:
+            console.log("Unbound value");    
+        }
       lastEvent.desc= lastEvent.country;
 	  if (lastEvent.bu) {
 		  lastEvent.desc+=" / " + lastEvent.bu;
