@@ -81,7 +81,7 @@ function Event({ event }) {
 
   return (
     <OverlayTrigger id="help" trigger="click" rootClose container={this} placement="top" overlay={popoverClickRootClose}>
-      <div>**<span class="eventTitle"> <span name={event.title}></span></span><br/>{event.desc}</div>
+      <div>***<span class="eventTitle"> <span name={event.translate}></span></span><br/>{event.desc}</div>
     </OverlayTrigger>
   );
 }
@@ -147,7 +147,7 @@ class App extends Component {
             break;
           //TASK NAME FR
           case 8:
-              my_self.event.title=$(this).data("options").value;
+              my_self.event.translate=$(this).data("options").value;
             break;  
           // TASK COLOR
           case 10:
@@ -238,7 +238,7 @@ class App extends Component {
             break;
           //TASK NAME FR
           case 8:
-              my_self.event.title=$(this).data("options").value;
+              my_self.event.translate=$(this).data("options").value;
             break;  
           // TASK COLOR
           case 10:
@@ -340,7 +340,7 @@ class App extends Component {
             break;
           //TASK NAME FR
           case 8:
-              my_self.event.title=$(this).data("options").value;
+              my_self.event.translate=$(this).data("options").value;
             break;  
           // TASK COLOR
           case 10:
