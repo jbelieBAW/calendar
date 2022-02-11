@@ -67,7 +67,7 @@ function Event({ event }) {
 
   let popoverClickRootClose = (
     <Popover id="popover-trigger-click-root-close">
-      <Popover.Header as="h3"><span name='{event.title}'></span></Popover.Header>
+      <Popover.Header as="h3"><span name={event.title}></span></Popover.Header>
       <Popover.Body>
         <span>{event.country}</span><br/>
         <span>{event.bu}</span><br/>
@@ -81,7 +81,7 @@ function Event({ event }) {
 
   return (
     <OverlayTrigger id="help" trigger="click" rootClose container={this} placement="top" overlay={popoverClickRootClose}>
-      <div>*<span class="eventTitle"> <span name='{event.title}'></span></span><br/>{event.desc}</div>
+      <div>**<span class="eventTitle"> <span name={event.title}></span></span><br/>{event.desc}</div>
     </OverlayTrigger>
   );
 }
