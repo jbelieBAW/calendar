@@ -148,7 +148,7 @@ class App extends Component {
             break;
           //TASK NAME FR
           case 8:
-              my_self.event.title=$(this).data("options").value;
+              my_self.event.title = $(this).text();
             break;  
           // TASK COLOR
           case 10:
@@ -239,7 +239,7 @@ class App extends Component {
             break;
           //TASK NAME FR
           case 8:
-              my_self.event.title=$(this).data("options").value;
+              my_self.event.title = $(this).text();
             break;  
           // TASK COLOR
           case 10:
@@ -341,7 +341,7 @@ class App extends Component {
             break;
           //TASK NAME FR
           case 8:
-              my_self.event.title=$(this).data("options").value;
+              my_self.event.title = $(this).text();
             break;  
           // TASK COLOR
           case 10:
