@@ -16,74 +16,75 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const localizer = momentLocalizer(moment) // or globalizeLocalizer
 
 const defaultMessages_fr={
-  date: 'Date',
-  time: 'Heure',
-  event: 'Evènement',
-  allDay: 'Toute la journée',
-  week: 'Semaine',
-  work_week: 'Semaine de travail',
-  day: 'Jour',
-  month: 'Mois',
-  previous: 'Précédent',
-  next: 'Suivant',
-  yesterday: 'Hier',
-  tomorrow: 'Demain',
-  today: "Aujourd'hui",
-  agenda: 'Agenda',
-  noEventsInRange: "Il n'y a pas d'évènements dans cette période.",
-  deleteButton: "SUPPRIMER",
-  showMore: function showMore(total) {
-    return "+" + total + " de plus";
-  }
+	date: 'Date',
+	time: 'Heure',
+	event: 'Evènement',
+	allDay: 'Toute la journée',
+	week: 'Semaine',
+	work_week: 'Semaine de travail',
+	day: 'Jour',
+	month: 'Mois',
+	previous: 'Précédent',
+	next: 'Suivant',
+	yesterday: 'Hier',
+	tomorrow: 'Demain',
+	today: "Aujourd'hui",
+	agenda: 'Agenda',
+	noEventsInRange: "Il n'y a pas d'évènements dans cette période.",
+	deleteButton: "SUPPRIMER",
+	showMore: function showMore(total) {
+		return "+" + total + " de plus";
+	}
 };
 
 const defaultMessages_en={
-  date: 'Date',
-  time: 'Time',
-  event: 'Event',
-  allDay: 'All Day',
-  week: 'Week',
-  work_week: 'Work Week',
-  day: 'Day',
-  month: 'Month',
-  previous: 'Back',
-  next: 'Next',
-  yesterday: 'Yesterday',
-  tomorrow: 'Tomorrow',
-  today: 'Today',
-  agenda: 'Agenda',
-  noEventsInRange: 'There are no events in this range.',
-  deleteButton: "DELETE",
-  showMore: function showMore(total) {
-    return "+" + total + " more";
-  }
+	date: 'Date',
+	time: 'Time',
+	event: 'Event',
+	allDay: 'All Day',
+	week: 'Week',
+	work_week: 'Work Week',
+	day: 'Day',
+	month: 'Month',
+	previous: 'Back',
+	next: 'Next',
+	yesterday: 'Yesterday',
+	tomorrow: 'Tomorrow',
+	today: 'Today',
+	agenda: 'Agenda',
+	noEventsInRange: 'There are no events in this range.',
+	deleteButton: "DELETE",
+	showMore: function showMore(total) {
+		return "+" + total + " more";
+	}
 };
 
+
 function Event({ event }) {
-  function deleteEventClick(id) {
-    $('span[name="react-control-customData"]').text(id);
-    document.getElementsByName("react-control-deleteEvent-button")[0].click();
-  };
+	function deleteEventClick(id) {
+		$('span[name="react-control-customData"]').text(id);
+		document.getElementsByName("react-control-deleteEvent-button")[0].click();
+	};
 
-  let popoverClickRootClose = (
-    <Popover id="popover-trigger-click-root-close">
-      <Popover.Header as="h3">{event.title}</Popover.Header>
-      <Popover.Body>
-        <span>{event.country}</span><br/>
-        <span>{event.bu}</span><br/>
-        <span>{event.entity}</span><br/>
-        <span>{event.site}</span><br/>
-        <span>{event.safe}</span><br/>
-        <button onClick={() => deleteEventClick(event.id)}>{event.deleteButtonText}</button>
-      </Popover.Body>
-    </Popover>
-  );
+	let popoverClickRootClose = (
+		<Popover id="popover-trigger-click-root-close">
+		  <Popover.Header as="h3">{event.title}</Popover.Header>
+		  <Popover.Body>
+			<span>{event.country}</span><br/>
+			<span>{event.bu}</span><br/>
+			<span>{event.entity}</span><br/>
+			<span>{event.site}</span><br/>
+			<span>{event.safe}</span><br/>
+			<button onClick={() => deleteEventClick(event.id)}>{event.deleteButtonText}</button>
+		  </Popover.Body>
+		</Popover>
+	);
 
-  return (
-    <OverlayTrigger id="help" trigger="click" rootClose container={this} placement="top" overlay={popoverClickRootClose}>
-      <div><span class="eventTitle"> <span name={event.translate}></span></span><br/>{event.desc}</div>
-    </OverlayTrigger>
-  );
+	return (
+		<OverlayTrigger id="help" trigger="click" rootClose container={this} placement="top" overlay={popoverClickRootClose}>
+			<div><span class="eventTitle"> {event.title}</span><br/>{event.desc}</div>
+		</OverlayTrigger>
+	);
 }
 
 class App extends Component {
@@ -100,7 +101,7 @@ class App extends Component {
     if ($('[name="com.dcr.datalabel.lang"]').html()=='FR'){
       currentDeleteButtonText = 'SUPPRIMER';
       var currentCulture = 'fr';
-    }else{
+    } else {
       currentDeleteButtonText = 'DELETE';
       var currentCulture = 'en';
     }
@@ -147,7 +148,7 @@ class App extends Component {
             break;
           //TASK NAME FR
           case 8:
-              my_self.event.translate=$(this).data("options").value;
+              my_self.event.title=$(this).data("options").value;
             break;  
           // TASK COLOR
           case 10:
@@ -238,7 +239,7 @@ class App extends Component {
             break;
           //TASK NAME FR
           case 8:
-              my_self.event.translate=$(this).data("options").value;
+              my_self.event.title=$(this).data("options").value;
             break;  
           // TASK COLOR
           case 10:
@@ -340,7 +341,7 @@ class App extends Component {
             break;
           //TASK NAME FR
           case 8:
-              my_self.event.translate=$(this).data("options").value;
+              my_self.event.title=$(this).data("options").value;
             break;  
           // TASK COLOR
           case 10:
