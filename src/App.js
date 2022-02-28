@@ -67,7 +67,7 @@ function Event({ event }) {
 
   let popoverClickRootClose = (
     <Popover id="popover-trigger-click-root-close">
-      <Popover.Header as="h3"><span name={event.title}></span></Popover.Header>
+      <Popover.Header as="h3">{event.title}</Popover.Header>
       <Popover.Body>
         <span>{event.country}</span><br/>
         <span>{event.bu}</span><br/>
