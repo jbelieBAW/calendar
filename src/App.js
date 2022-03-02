@@ -95,30 +95,23 @@ class App extends Component {
 	};
 
 	readTasksFromHTML(htmlElement) {
-		$('#add').click(function() {
-			console.log(this.props.events);
-		});
+
 		var eventsArray = [];
 		var currentCulture = '';
 		var currentDefaultMessages = {};
 		var currentDeleteButtonText = '';
 		if ($('[name="com.dcr.datalabel.lang"]').html()=='FR'){
-		  currentCulture = 'fr';
-		  currentDefaultMessages = defaultMessages_fr;
-		  currentDeleteButtonText = 'SUPPRIMER';
+			currentCulture = 'fr';
+			currentDefaultMessages = defaultMessages_fr;
+			currentDeleteButtonText = 'SUPPRIMER';
 		} else {
-		  currentCulture = 'en';
-		  currentDefaultMessages = defaultMessages_en;
-		  currentDeleteButtonText = 'DELETE';
+			currentCulture = 'en';
+			currentDefaultMessages = defaultMessages_en;
+			currentDeleteButtonText = 'DELETE';
 		}
 	
 		
-		this.setState({
-			defaultCulture: currentCulture, 
-			defaultMessages: currentDefaultMessages, 
-			defaultDeleteButtonText: currentDeleteButtonText, 
-			events : eventsArray
-		});
+		
 		
 		$($('div[name="CalendarDataTable"] .grid-body .grid-body-content tr').not('.empty-grid')).each(function(){
 			var $this = $(this);
@@ -169,7 +162,7 @@ class App extends Component {
 					my_self.event.color=$(this).data("options").value;
 					break;
 				  default:
-					console.log("Unbound value");    
+					//console.log("Unbound value");    
 				}
 			
 			});
@@ -189,7 +182,15 @@ class App extends Component {
 			  my_self.event.desc = my_self.event.desc + " / " + my_self.event.safe;
 			}
 			
+			
 			eventsArray.push(this.event);
+		});
+		
+		this.setState({
+			defaultCulture: currentCulture, 
+			defaultMessages: currentDefaultMessages, 
+			defaultDeleteButtonText: currentDeleteButtonText, 
+			events : eventsArray
 		});
 	}
 	
