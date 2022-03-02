@@ -89,284 +89,145 @@ function Event({ event }) {
 
 class App extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {defaultCulture: '', defaultMessages: {}, defaultDeleteButtonText:'', events: []};
-  };
+	constructor(props) {
+		super(props);
+		this.state = {defaultCulture: '', defaultMessages: {}, defaultDeleteButtonText:'', events: []};
+	};
 
-  refreshEvents() {
-    var eventsArray = [];
-    var currentDeleteButtonText = '';
-    var currentCulture = '';
-    if ($('[name="com.dcr.datalabel.lang"]').html()=='FR'){
-      currentDeleteButtonText = 'SUPPRIMER';
-      var currentCulture = 'fr';
-    } else {
-      currentDeleteButtonText = 'DELETE';
-      var currentCulture = 'en';
-    }
-
-    $('div[name="CalendarDataTable"] .grid-body .grid-body-content tr').not('.empty-grid').each(function(){
-      var $this = $(this);
-      this.event = new Object;
-      var my_self = this;
-      $this.children("td").each(function( idx ) {
-        my_self.event.allDay=true;
-        my_self.event.deleteButtonText=currentDeleteButtonText;
-		switch(idx){
-          //ID
-          case 0:
-            my_self.event.id=$(this).data("options").value;
-            break;
-          //COUNTRY
-          case 1:
-            my_self.event.country=$(this).data("options").value;
-            break;
-          //BU
-          case 2:
-            my_self.event.bu=$(this).data("options").value;
-            break;
-          //ENTITY
-          case 3:
-            my_self.event.entity=$(this).data("options").value;
-            break;
-          //SITE
-          case 4:
-            my_self.event.site=$(this).data("options").value;
-            break;
-          //SAFE
-          case 5:
-            my_self.event.safe=$(this).data("options").value;
-            break;  
-          //START DATE
-          case 6:
-            my_self.event.start=$(this).data("options").value;
-            break;
-          //END DATE
-          case 7:
-            my_self.event.end=$(this).data("options").value;
-            break;
-          //TASK NAME FR
-          case 8:
-              my_self.event.title = $(this).text();
-            break;  
-          // TASK COLOR
-          case 10:
-            my_self.event.color=$(this).data("options").value;
-            break;
-          default:
-            console.log("Unbound value");    
-        }
-        my_self.event.desc= my_self.event.country ;
-		if ( my_self.event.bu ) {
-			my_self.event.desc+=" / " + my_self.event.bu;
-			if ( my_self.event.entity ) {
-				my_self.event.desc+=" / " + my_self.event.entity;
-				if ( my_self.event.site ) {
-					my_self.event.desc+=" / " + my_self.event.site;
-				}				
-			}
+	readTasksFromHTML(htmlElement) {
+		$('#add').click(function() {
+			console.log(this.props.events);
+		});
+		var eventsArray = [];
+		var currentCulture = '';
+		var currentDefaultMessages = {};
+		var currentDeleteButtonText = '';
+		if ($('[name="com.dcr.datalabel.lang"]').html()=='FR'){
+		  currentCulture = 'fr';
+		  currentDefaultMessages = defaultMessages_fr;
+		  currentDeleteButtonText = 'SUPPRIMER';
+		} else {
+		  currentCulture = 'en';
+		  currentDefaultMessages = defaultMessages_en;
+		  currentDeleteButtonText = 'DELETE';
 		}
+	
 		
-        if(my_self.event.safe != ""){
-          my_self.event.desc = my_self.event.desc + " / " + my_self.event.safe;
-        }
-      });
-      eventsArray.push(this.event);
-    });
-    if (eventsArray.length===0){
-      eventsArray = [...this.state.events];
-      eventsArray.splice(0,eventsArray.length); 
-    }
-    this.setState({events : eventsArray});
-  };
-
-  componentDidMount() {
-    var eventsArray = [];
-    var currentCulture = '';
-    var currentDefaultMessages = {};
-    var currentDeleteButtonText = '';
-   if ($('[name="com.dcr.datalabel.lang"]').html()=='FR'){
-    //if (/^fr\b/.test(navigator.language)) {
-      currentCulture = 'fr';
-      currentDefaultMessages = defaultMessages_fr;
-      currentDeleteButtonText = 'SUPPRIMER';
-    }else{
-      currentCulture = 'en';
-      currentDefaultMessages = defaultMessages_en;
-      currentDeleteButtonText = 'DELETE';
-    }
-    
-    $('div[name="CalendarDataTable"] .grid-body .grid-body-content tr').not('.empty-grid').each(function(){
-      var $this = $(this);
-      this.event = new Object;
-      var my_self = this;
-      $this.children("td").each(function( idx ) {
-        my_self.event.allDay=true;
-        my_self.event.deleteButtonText=currentDeleteButtonText;
-        switch(idx){
-          //ID
-          case 0:
-            my_self.event.id=$(this).data("options").value;
-            break;
-          //COUNTRY
-          case 1:
-            my_self.event.country=$(this).data("options").value;
-            break;
-          //BU
-          case 2:
-            my_self.event.bu=$(this).data("options").value;
-            break;
-          //ENTITY
-          case 3:
-            my_self.event.entity=$(this).data("options").value;
-            break;
-          //SITE
-          case 4:
-            my_self.event.site=$(this).data("options").value;
-            break;
-          //SAFE
-          case 5:
-            my_self.event.safe=$(this).data("options").value;
-            break;  
-          //START DATE
-          case 6:
-            my_self.event.start=$(this).data("options").value;
-            break;
-          //END DATE
-          case 7:
-            my_self.event.end=$(this).data("options").value;
-            break;
-          //TASK NAME FR
-          case 8:
-              my_self.event.title = $(this).text();
-            break;  
-          // TASK COLOR
-          case 10:
-            my_self.event.color=$(this).data("options").value;
-            break;
-          default:
-            console.log("Unbound value");    
-        }
-        my_self.event.desc= my_self.event.country ;
-		if ( my_self.event.bu ) {
-			my_self.event.desc+=" / " + my_self.event.bu;
-			if ( my_self.event.entity ) {
-				my_self.event.desc+=" / " + my_self.event.entity;
-				if ( my_self.event.site ) {
-					my_self.event.desc+=" / " + my_self.event.site;
-				}				
-			}
-		}
-        if(my_self.event.safe != ""){
-          my_self.event.desc = my_self.event.desc + " / " + my_self.event.safe;
-        }
-      });
-      eventsArray.push(this.event);
-    });
-    this.setState({defaultCulture: currentCulture, defaultMessages: currentDefaultMessages, defaultDeleteButtonText: currentDeleteButtonText, events : eventsArray});
-  };
-
-  render() {
-    return (
-      <div className="App">
-        <Calendar
-          defaultDate={moment().toDate()}
-          defaultView="month"
-          events={this.state.events}
-          localizer={localizer}
-          messages={this.state.defaultMessages}
-          //onEventDrop={this.onEventDrop}
-          //onEventResize={this.onEventResize}
-          //resizable
-          culture={this.state.defaultCulture}
-          style={{ height: "90vh" }}
-          //resources={resourceMap}
-          //resourceIdAccessor="resourceId"
-          //resourceTitleAccessor="resourceTitle"
-          eventPropGetter={event => ({
-            style: {
-              backgroundColor: event.color,
-              color: 'white',
-              border: '0px'
-            }
-          })}
-          components={{
-            event: Event
-          }}
-        />
-    </div>
-    );
-  };
-
-  addCreatedEvent() {
-    var lastEvent = new Object;
-    var currentCulture = this.state.defaultCulture;
-    var currentDeleteButtonText = this.state.defaultDeleteButtonText;
-    $('div[name="CalendarDataTable"] .grid-body .grid-body-content tr').not('.empty-grid').last().children("td").each(function( idx ) {
-      lastEvent.allDay=true;
-      lastEvent.deleteButtonText=currentDeleteButtonText;
-      switch(idx){
-          //ID
-          case 0:
-            my_self.event.id=$(this).data("options").value;
-            break;
-          //COUNTRY
-          case 1:
-            my_self.event.country=$(this).data("options").value;
-            break;
-          //BU
-          case 2:
-            my_self.event.bu=$(this).data("options").value;
-            break;
-          //ENTITY
-          case 3:
-            my_self.event.entity=$(this).data("options").value;
-            break;
-          //SITE
-          case 4:
-            my_self.event.site=$(this).data("options").value;
-            break;
-          //SAFE
-          case 5:
-            my_self.event.safe=$(this).data("options").value;
-            break;  
-          //START DATE
-          case 6:
-            my_self.event.start=$(this).data("options").value;
-            break;
-          //END DATE
-          case 7:
-            my_self.event.end=$(this).data("options").value;
-            break;
-          //TASK NAME FR
-          case 8:
-              my_self.event.title = $(this).text();
-            break;  
-          // TASK COLOR
-          case 10:
-            my_self.event.color=$(this).data("options").value;
-            break;
-          default:
-            console.log("Unbound value");    
-        }
-      lastEvent.desc= lastEvent.country;
-	  if (lastEvent.bu) {
-		  lastEvent.desc+=" / " + lastEvent.bu;
-			if(lastEvent.entity) {
-				lastEvent.desc+=" / " + lastEvent.entity;
-				if(lastEvent.site) {
-					lastEvent.desc+=" / " + lastEvent.site;
+		this.setState({
+			defaultCulture: currentCulture, 
+			defaultMessages: currentDefaultMessages, 
+			defaultDeleteButtonText: currentDeleteButtonText, 
+			events : eventsArray
+		});
+		
+		$($('div[name="CalendarDataTable"] .grid-body .grid-body-content tr').not('.empty-grid')).each(function(){
+			var $this = $(this);
+			this.event = new Object;
+			var my_self = this;
+			$this.children("td").each(function( idx ) {
+				my_self.event.allDay = true;
+				my_self.event.deleteButtonText = currentDeleteButtonText;
+				switch(idx){
+				  //ID
+				  case 0:
+					my_self.event.id=$(this).data("options").value;
+					break;
+				  //COUNTRY
+				  case 1:
+					my_self.event.country=$(this).data("options").value;
+					break;
+				  //BU
+				  case 2:
+					my_self.event.bu=$(this).data("options").value;
+					break;
+				  //ENTITY
+				  case 3:
+					my_self.event.entity=$(this).data("options").value;
+					break;
+				  //SITE
+				  case 4:
+					my_self.event.site=$(this).data("options").value;
+					break;
+				  //SAFE
+				  case 5:
+					my_self.event.safe=$(this).data("options").value;
+					break;  
+				  //START DATE
+				  case 6:
+					my_self.event.start=$(this).data("options").value;
+					break;
+				  //END DATE
+				  case 7:
+					my_self.event.end=$(this).data("options").value;
+					break;
+				  //TASK NAME FR
+				  case 8:
+					  my_self.event.title = $(this).text();
+					break;  
+				  // TASK COLOR
+				  case 10:
+					my_self.event.color=$(this).data("options").value;
+					break;
+				  default:
+					console.log("Unbound value");    
+				}
+			
+			});
+		  
+			my_self.event.desc= my_self.event.country ;
+			if ( my_self.event.bu ) {
+				my_self.event.desc+=" / " + my_self.event.bu;
+				if ( my_self.event.entity ) {
+					my_self.event.desc+=" / " + my_self.event.entity;
+					if ( my_self.event.site ) {
+						my_self.event.desc+=" / " + my_self.event.site;
+					}				
 				}
 			}
-	  }
-      if(lastEvent.safe != ""){
-        lastEvent.desc = lastEvent.desc + " / " + lastEvent.safe;
-      }
-    });
-    var newEventsArray = [...this.state.events, lastEvent];
-    this.setState({events : newEventsArray});
-  }
+			
+			if(my_self.event.safe != ""){
+			  my_self.event.desc = my_self.event.desc + " / " + my_self.event.safe;
+			}
+			
+			eventsArray.push(this.event);
+		});
+	}
+	
+	refreshEvents() {
+		this.readTasksFromHTML();
+	};
+
+	componentDidMount() {
+		this.readTasksFromHTML();
+	};
+
+	render() {
+		return (
+			<div className="App">
+				<Calendar
+				  defaultDate={moment().toDate()}
+				  defaultView="month"
+				  events={this.state.events}
+				  localizer={localizer}
+				  messages={this.state.defaultMessages}
+				  culture={this.state.defaultCulture}
+				  style={{ height: "90vh" }}
+				  eventPropGetter={event => ({
+					style: {
+					  backgroundColor: event.color,
+					  color: 'white',
+					  border: '0px'
+					}
+				  })}
+				  components={{
+					event: Event
+				  }}
+				/>
+			</div>
+		);
+	};
+
+	
 };
 
 export default App; 
