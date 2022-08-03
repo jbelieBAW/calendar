@@ -210,7 +210,7 @@ class App extends Component {
 		$("*[name='com.dcr.CalendarListView.date_start']").html(dateStart);
 
 		
-		let dateEnd = event['start'].format('yyyy-MM-dd');
+		let dateEnd = event['end'].format('yyyy-MM-dd');
 		$("[name='com.dcr.CalendarListView.date_end']").html(dateEnd.format('yyyy-MM-dd'));
 		
 
