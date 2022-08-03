@@ -196,10 +196,12 @@ class App extends Component {
 	
 	refreshEvents() {
 		this.readTasksFromHTML();
+		document.getElementsByClassName('dcc-tasks-loader')[0].style.display = 'none';
 	};
 
 	componentDidMount() {
 		this.readTasksFromHTML();
+		document.getElementsByClassName('dcc-tasks-loader')[0].style.display = 'none';
 	};
 
 	onRangeChange = (event) => {
@@ -208,9 +210,7 @@ class App extends Component {
 		$("*[name='com.dcr.CalendarListView.date_start']").html(dateStart);
 
 		
-		let dateStartObject = new Date(event.start.format('yyyy-MM-dd'));
-		let dateEnd = new Date(dateStartObject);
-		dateEnd.setDate(dateEnd.getDate() + 7);
+		let dateEnd = event['start'].format('yyyy-MM-dd');
 		$("[name='com.dcr.CalendarListView.date_end']").html(dateEnd.format('yyyy-MM-dd'));
 		
 
