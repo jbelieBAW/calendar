@@ -32,3 +32,24 @@
 	color: #FFF;
 	font-weight: bold;
 }
+
+.App {
+	position: relative;
+}
+
+.dcc-spinner {
+   width: 8px;
+   height: 8px;
+   border-radius: 8px;
+   box-shadow: 20px 0px 0 0 rgba(133,133,136,0.2), 16.2px 11.8px 0 0 rgba(133,133,136,0.4), 6.2px 19px 0 0 rgba(133,133,136,0.6), -6.2px 19px 0 0 rgba(133,133,136,0.8), -16.2px 11.8px 0 0 #858588;
+   animation: spinner-b87k6z 1s infinite linear;
+   left: 50%;
+   top: 30px;
+   position: absolute;
+}
+
+@keyframes spinner-b87k6z {
+   to {
+      transform: rotate(360deg);
+   }
+}

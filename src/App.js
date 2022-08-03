@@ -202,15 +202,34 @@ class App extends Component {
 		this.readTasksFromHTML();
 	};
 
+	onRangeChange = (event) => {
+		console.log('range change', event);
+		let dateStart = event['start'].format('yyyy-MM-dd');
+		$("*[name='com.dcr.CalendarListView.date_start']").html(dateStart);
+
+		
+		let dateStartObject = new Date(event.start.format('yyyy-MM-dd'));
+		let dateEnd = new Date(dateStartObject);
+		dateEnd.setDate(dateEnd.getDate() + 7);
+		$("[name='com.dcr.CalendarListView.date_end']").html(dateEnd.format('yyyy-MM-dd'));
+		
+
+		document.getElementsByName("com.dcr.CalendarForm.button.refresh.tasks")[0].click();
+	}
+	
 	render() {
 		return (
 			<div className="App">
+				<div className="dcc-tasks-loader">
+					<div className="dcc-spinner"></div>
+				</div>
 				<Calendar
 				  defaultDate={moment().toDate()}
 				  defaultView="month"
 				  events={this.state.events}
 				  localizer={localizer}
 				  messages={this.state.defaultMessages}
+				  onRangeChange={this.onRangeChange}
 				  culture={this.state.defaultCulture}
 				  style={{ height: "90vh" }}
 				  eventPropGetter={event => ({
