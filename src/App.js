@@ -211,7 +211,7 @@ class App extends Component {
             defaultMessages: this.currentDefaultMessages,
             events : []
 		});
-		document.getElementsByClassName('.dcc-tasks-loader')[0].style.display = 'block';
+		document.getElementsByClassName('dcc-tasks-loader')[0].style.display = 'block';
 	}
 	
 	onRangeChange = (event) => {
