@@ -204,6 +204,16 @@ class App extends Component {
 		document.getElementsByClassName('dcc-tasks-loader')[0].style.display = 'none';
 	};
 
+	startLoadingStatus() {
+		this.eventsArray = [];
+		this.setState({
+			defaultCulture: this.currentCulture,
+            defaultMessages: this.currentDefaultMessages,
+            events : []
+		});
+		document.getElementsByClassName('.dcc-tasks-loader')[0].style.display = 'block';
+	}
+	
 	onRangeChange = (event) => {
 		console.log('range change', event);
 		let dateStart = event['start'].format('yyyy-MM-dd');
